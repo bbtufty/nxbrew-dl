@@ -2,7 +2,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from nxbrew_dl.gui import MainWindow
+from nxbrew_dl import MainWindow
 
 
 def main():

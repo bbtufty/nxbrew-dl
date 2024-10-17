@@ -60,3 +60,37 @@ def check_has_filetype(
         return True
     else:
         return False
+
+
+def parse_languages(f, lang_dict):
+    """Parse languages out of a string
+
+    Args:
+        f (str): String pattern to match
+        lang_dict (dict): Dictionary of languages
+    """
+
+    long_langs = list(lang_dict.keys())
+    short_langs = [lang_dict[l] for l in long_langs]
+
+    f_split = f.split(",")
+
+    langs = []
+    for fs in f_split:
+
+        # Strip any leading whitespace
+        fs = fs.strip()
+
+        for i, short_lang in enumerate(short_langs):
+
+            # Do a first pass where we check against short languages
+            short_match = re.match(short_lang, fs, flags=re.NOFLAG)
+            if short_match:
+                langs.append(long_langs[i])
+
+            # Do a first pass where we check against short languages
+            long_match = re.match(long_langs[i], fs, flags=re.NOFLAG)
+            if long_match:
+                langs.append(long_langs[i])
+
+    return langs
