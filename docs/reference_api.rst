@@ -14,10 +14,18 @@ GUI
     :members:
     :undoc-members:
 
+=================
+NXBrew Downloader
+=================
+
+.. autoclass:: nxbrew_dl.nxbrew_dl.NXBrew
+    :members:
+    :undoc-members:
+
 =========
 Utilities
 =========
 
-.. automodule:: nxbrew_dl.nxbrew_dl
+.. automodule:: nxbrew_dl.util
     :members:
     :undoc-members:

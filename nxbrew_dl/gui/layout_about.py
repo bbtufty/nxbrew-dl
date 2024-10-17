@@ -30,6 +30,8 @@ class Ui_About(object):
         About.setSizePolicy(sizePolicy)
         About.setMinimumSize(QSize(332, 191))
         About.setMaximumSize(QSize(332, 191))
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.HelpAbout))
+        About.setWindowIcon(icon)
         About.setModal(True)
         self.verticalLayout = QVBoxLayout(About)
         self.verticalLayout.setObjectName(u"verticalLayout")

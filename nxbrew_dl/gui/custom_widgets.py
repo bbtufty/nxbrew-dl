@@ -22,8 +22,6 @@ def set_dl(
 
     dl = QTableWidgetItem()
     dl.setTextAlignment(Qt.AlignmentFlag.AlignHCenter)
-
-    # TODO: If this is in the cache, then auto-check it
     dl.setCheckState(Qt.CheckState.Unchecked)
 
     table.setItem(row_position, 1, dl)
@@ -37,15 +35,16 @@ class TableRowWidget(QTableWidgetItem):
         Args:
             row_dict (dict): Dictionary of row details
             row_name_key (str): Column name to define the name for the row
-
-        TODO:
-            Some names don't have NSP or XCI. In which case, we probably want
-                to set a ??? for them
         """
         super(TableRowWidget, self).__init__()
 
         self.name = row_dict[row_name_key]
         self.url = row_dict["url"]
+
+        # If we've parsed neither an NSP or XCI, mark as undefined
+        if not row_dict["has_nsp"] and not row_dict["has_xci"]:
+            row_dict["has_nsp"] = "UNDEF"
+            row_dict["has_xci"] = "UNDEF"
 
         self.row_dict = row_dict
         self.row_name_key = row_name_key
@@ -142,12 +141,16 @@ class TableRowWidget(QTableWidgetItem):
         has_filetype.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
 
         # Set text and colour
-        if self.row_dict[key]:
+        if self.row_dict[key] == "UNDEF":
+            has_filetype.setText("???")
+            colour = QBrush(COLOURS["orange"])
+        elif self.row_dict[key]:
             has_filetype.setText("Yes")
             colour = QBrush(COLOURS["green"])
         else:
             has_filetype.setText("No")
             colour = QBrush(COLOURS["red"])
+
         colour.setStyle(Qt.BrushStyle.SolidPattern)
         has_filetype.setBackground(colour)
 

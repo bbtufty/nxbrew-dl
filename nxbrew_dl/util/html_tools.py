@@ -4,34 +4,33 @@ from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 
-from .regex_tools import get_game_name, check_has_filetype
+from .regex_tools import get_game_name, check_has_filetype, parse_languages
 
 
-def get_game_index(
-    nxbrew_url,
-    cache=True,
+def get_html_page(
+    url,
+    cache=False,
+    cache_filename="index.html",
 ):
-    """Get the NXBrew index as a soup
+    """Get an HTML page as a soup
 
     Args:
-        nxbrew_url (string): NXBrew URL
-        cache (bool): If True, will save the game index as a cache. Defaults to True FIXME
+        url (string): URL
+        cache (bool): If True, will save the game index as a cache. Defaults to False
+        cache_filename (string): Filename to cache file to. Defaults to "index.html"
     """
-
-    game_index_name = "game_index.html"
-    url = urljoin(nxbrew_url, "Index/game-index/games/")
 
     if not cache:
         r = requests.get(url)
         soup = BeautifulSoup(r.content, "html.parser")
     else:
-        if not os.path.exists(game_index_name):
+        if not os.path.exists(cache_filename):
             r = requests.get(url)
-            with open(game_index_name, mode="wb") as f:
+            with open(cache_filename, mode="wb") as f:
                 f.write(r.content)
             r = r.content
         else:
-            with open(game_index_name, mode="rb") as f:
+            with open(cache_filename, mode="rb") as f:
                 r = f.read()
         soup = BeautifulSoup(r, "html.parser")
 
@@ -53,8 +52,12 @@ def get_game_dict(
 
     game_dict = {}
 
+    url = urljoin(nxbrew_url, "Index/game-index/games/")
+
     # Load in the HTML
-    game_html = get_game_index(nxbrew_url)
+    game_html = get_html_page(url,
+                              cache_filename="game_index.html",
+                              )
     index = game_html.find("div", {"id": "easyindex-index"})
 
     nsp_xci_variations = regex_config["nsp_variations"] + regex_config["xci_variations"]
@@ -93,3 +96,24 @@ def get_game_dict(
         }
 
     return game_dict
+
+
+def get_languages(soup, lang_dict):
+    """Parse languages from a soup
+
+    Args:
+        soup (bs4.BeautifulSoup): soup object to find languages in
+        lang_dict (dict): Dictionary of languages
+    """
+
+    # Parse out languages, find the <strong> tag with language in it,
+    # and then find the next_sibling
+    strong_tag = soup.findAll("strong")
+    for s in strong_tag:
+        if "language" in s.text.lower():
+            lang_str = s.next_sibling.text
+            langs = parse_languages(
+                lang_str,
+                lang_dict=lang_dict,
+            )
+            return langs

@@ -95,6 +95,47 @@ class Ui_nxbrew_dl(object):
 
         self.verticalLayoutConfig.addItem(self.verticalSpacer_3)
 
+        self.labelJDownloaderDevice = QLabel(self.centralwidget)
+        self.labelJDownloaderDevice.setObjectName(u"labelJDownloaderDevice")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderDevice)
+
+        self.lineEditJDownloaderDevice = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderDevice.setObjectName(u"lineEditJDownloaderDevice")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderDevice.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderDevice.setSizePolicy(sizePolicy1)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderDevice)
+
+        self.labelJDownloaderUser = QLabel(self.centralwidget)
+        self.labelJDownloaderUser.setObjectName(u"labelJDownloaderUser")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderUser)
+
+        self.lineEditJDownloaderUser = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderUser.setObjectName(u"lineEditJDownloaderUser")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderUser.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderUser.setSizePolicy(sizePolicy1)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderUser)
+
+        self.labelJDownloaderPass = QLabel(self.centralwidget)
+        self.labelJDownloaderPass.setObjectName(u"labelJDownloaderPass")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderPass)
+
+        self.lineEditJDownloaderPass = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderPass.setObjectName(u"lineEditJDownloaderPass")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderPass.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderPass.setSizePolicy(sizePolicy1)
+        self.lineEditJDownloaderPass.setEchoMode(QLineEdit.EchoMode.Password)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderPass)
+
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_4)
+
         self.labelGameDLOptions = QLabel(self.centralwidget)
         self.labelGameDLOptions.setObjectName(u"labelGameDLOptions")
 
@@ -299,6 +340,19 @@ class Ui_nxbrew_dl(object):
 #endif // QT_CONFIG(statustip)
         self.lineEditDownloadDir.setPlaceholderText(QCoreApplication.translate("nxbrew_dl", u"/path/to/downloads", None))
         self.pushButtonDownloadDir.setText(QCoreApplication.translate("nxbrew_dl", u"Browse", None))
+        self.labelJDownloaderDevice.setText(QCoreApplication.translate("nxbrew_dl", u"JDownloader device name:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderDevice.setStatusTip(QCoreApplication.translate("nxbrew_dl", u"Device name for JDownloader", None))
+#endif // QT_CONFIG(statustip)
+        self.labelJDownloaderUser.setText(QCoreApplication.translate("nxbrew_dl", u"JDownloader username:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderUser.setStatusTip(QCoreApplication.translate("nxbrew_dl", u"JDownloader username", None))
+#endif // QT_CONFIG(statustip)
+        self.labelJDownloaderPass.setText(QCoreApplication.translate("nxbrew_dl", u"JDownloader password:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderPass.setStatusTip(QCoreApplication.translate("nxbrew_dl", u"JDownloader password", None))
+#endif // QT_CONFIG(statustip)
+        self.lineEditJDownloaderPass.setText("")
         self.labelGameDLOptions.setText(QCoreApplication.translate("nxbrew_dl", u"Base download options:", None))
         self.radioButtonPreferNSP.setText(QCoreApplication.translate("nxbrew_dl", u"Prefer NSPs", None))
         self.radioButtonPreferXCI.setText(QCoreApplication.translate("nxbrew_dl", u"Prefer XCIs", None))
