@@ -1,7 +1,14 @@
 import os
 from functools import partial
 
-from PySide6.QtCore import Slot, QSize
+from PySide6.QtCore import (
+    Slot,
+    Signal,
+    QObject,
+    QThread,
+    QSize,
+    Qt,
+)
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -13,7 +20,13 @@ import nxbrew_dl
 from .gui_about import AboutWindow
 from .gui_utils import open_url, get_gui_logger, add_row_to_table
 from .layout_nxbrew_dl import Ui_nxbrew_dl
-from ..nxbrew_dl import load_yml, save_yml, get_game_dict
+from ..nxbrew_dl import NXBrew
+from ..util import (
+    get_game_dict,
+    load_yml,
+    save_yml,
+    load_json,
+)
 
 
 def open_game_url(item):
@@ -36,7 +49,8 @@ class MainWindow(QMainWindow):
         """NXBrew-dl Main Window
 
         TODO:
-            - Actually download stuff
+            - Executable
+            - Discord webhook
             - Region/language priorities
         """
 
@@ -65,6 +79,13 @@ class MainWindow(QMainWindow):
         else:
             self.user_config = {}
         self.load_config()
+
+        # Read in user cache, keeping the filename around so we can save it out later
+        self.user_cache_file = os.path.join(os.getcwd(), "cache.json")
+        if os.path.exists(self.user_cache_file):
+            self.user_cache = load_json(self.user_cache_file)
+        else:
+            self.user_cache = {}
 
         self.logger = get_gui_logger(log_level="INFO")
         self.logger.warning("Do not close this window!")
@@ -169,6 +190,19 @@ class MainWindow(QMainWindow):
                 }
             )
 
+        # If in cache, check the row here
+        for cache_item in self.user_cache:
+            found_cache_item = False
+            for r in range(self.game_table.rowCount()):
+                if self.game_table.item(r, 0).toolTip() == cache_item:
+
+                    self.game_table.item(r, 1).setCheckState(Qt.CheckState.Checked)
+                    found_cache_item = True
+                    break
+
+            if found_cache_item:
+                continue
+
         self.ui.centralwidget.setEnabled(True)
 
     def load_config(
@@ -176,11 +210,17 @@ class MainWindow(QMainWindow):
     ):
         """Apply read in config to the GUI"""
 
-        if "nxbrew_url" in self.user_config:
-            self.ui.lineEditNXBrewURL.setText(self.user_config["nxbrew_url"])
+        text_fields = {
+            "nxbrew_url": self.ui.lineEditNXBrewURL,
+            "download_dir": self.ui.lineEditDownloadDir,
+            "jd_device": self.ui.lineEditJDownloaderDevice,
+            "jd_user": self.ui.lineEditJDownloaderUser,
+            "jd_pass": self.ui.lineEditJDownloaderPass,
+        }
 
-        if "download_dir" in self.user_config:
-            self.ui.lineEditDownloadDir.setText(self.user_config["download_dir"])
+        for field in text_fields:
+            if field in self.user_config:
+                text_fields[field].setText(self.user_config[field])
 
         if "prefer_filetype" in self.user_config:
 
@@ -197,8 +237,8 @@ class MainWindow(QMainWindow):
 
             button.setChecked(True)
 
-        if "download_updates" in self.user_config:
-            dl_updates = self.user_config["download_updates"]
+        if "download_update" in self.user_config:
+            dl_updates = self.user_config["download_update"]
             self.ui.checkBoxDownloadUpdates.setChecked(dl_updates)
 
         if "download_dlc" in self.user_config:
@@ -210,8 +250,16 @@ class MainWindow(QMainWindow):
     ):
         """Save config to file"""
 
-        self.user_config["nxbrew_url"] = self.ui.lineEditNXBrewURL.text()
-        self.user_config["download_dir"] = self.ui.lineEditDownloadDir.text()
+        text_fields = {
+            "nxbrew_url": self.ui.lineEditNXBrewURL.text(),
+            "download_dir": self.ui.lineEditDownloadDir.text(),
+            "jd_device": self.ui.lineEditJDownloaderDevice.text(),
+            "jd_user": self.ui.lineEditJDownloaderUser.text(),
+            "jd_pass": self.ui.lineEditJDownloaderPass.text(),
+        }
+
+        for field in text_fields:
+            self.user_config[field] = text_fields[field]
 
         prefer_filetype = self.ui.buttonGroupPreferNSPXCI.checkedButton().text()
         if prefer_filetype == "Prefer NSPs":
@@ -221,7 +269,7 @@ class MainWindow(QMainWindow):
         else:
             raise ValueError(f"Button {prefer_filetype} not understood")
 
-        self.user_config["download_updates"] = (
+        self.user_config["download_update"] = (
             self.ui.checkBoxDownloadUpdates.isChecked()
         )
         self.user_config["download_dlc"] = self.ui.checkBoxDownloadDLC.isChecked()
@@ -255,7 +303,46 @@ class MainWindow(QMainWindow):
         # Start out by saving the config
         self.save_config()
 
-        raise NotImplementedError("Not yet implemented!")
+        # Get a list of things to download
+        to_download = {}
+
+        for r in range(self.game_table.rowCount()):
+            if self.game_table.item(r, 1).checkState() == Qt.CheckState.Checked:
+
+                url = self.game_table.item(r, 0).toolTip()
+
+                for g in self.game_dict:
+                    if self.game_dict[g]["url"] == url:
+
+                        n = self.game_dict[g]["short_name"]
+                        to_download.update({n: url})
+
+        # Set up everything so the GUI doesn't hang
+        self.nxbrew_thread = QThread()
+        self.nxbrew_worker = NXBrewWorker(
+            to_download=to_download,
+            logger=self.logger,
+        )
+
+        self.nxbrew_worker.moveToThread(self.nxbrew_thread)
+        self.nxbrew_thread.started.connect(self.nxbrew_worker.run)
+
+        # Delete the thread once we're done
+        self.nxbrew_worker.finished.connect(self.nxbrew_thread.quit)
+        self.nxbrew_worker.finished.connect(self.nxbrew_worker.deleteLater)
+        self.nxbrew_thread.finished.connect(self.nxbrew_thread.deleteLater)
+
+        # When finished, re-enable the UI
+        self.nxbrew_thread.finished.connect(
+            lambda: self.ui.centralwidget.setEnabled(True)
+        )
+        # Start the thread
+        self.nxbrew_thread.start()
+
+        # Disable the UI
+        self.ui.centralwidget.setEnabled(False)
+
+        return True
 
     @Slot()
     def close_all(self):
@@ -265,3 +352,29 @@ class MainWindow(QMainWindow):
         self.save_config()
 
         QApplication.closeAllWindows()
+
+
+class NXBrewWorker(QObject):
+    """Handles running NXBrew so GUI doesn't hang"""
+
+    finished = Signal()
+
+    def __init__(
+        self,
+        to_download,
+        logger=None,
+    ):
+        super().__init__()
+
+        self.to_download = to_download
+        self.logger = logger
+
+    def run(self):
+
+        nx = NXBrew(
+            to_download=self.to_download,
+            logger=self.logger,
+        )
+        nx.run()
+
+        self.finished.emit()

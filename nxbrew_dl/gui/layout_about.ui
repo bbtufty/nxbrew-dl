@@ -31,6 +31,9 @@
   <property name="windowTitle">
    <string>About</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+  </property>
   <property name="modal">
    <bool>true</bool>
   </property>

@@ -9,10 +9,11 @@ NXBrew-dl
 .. image:: https://img.shields.io/badge/license-GNUv3-blue.svg?label=License&style=flat-square
 
 NXBrew-dl is intended to be an easy-to-user interface to download ROMs, DLC and update files for NSP. It does so via
-a GUI interface, allowing users to download items in bulk and keeping things up-to-date.
+a GUI interface, allowing users to download items in bulk and keeping things up-to-date. NXBrew-dl connects to
+JDownloader to allow for easy download/extraction from multiple sites.
 
-As of now, this is in extremely early development, and only currently acts as an interactive browser for the ROM
-list on NXBrew. Downloads do not yet work!
+As of now, this is in extremely early development. It will parse and download many ROMs, but be aware that currently
+if multiple regions exist, it will only download the US release. This will be upgrade in a future release.
 
 For details on installation, see :doc:`installation <installation>`.
 
