@@ -30,10 +30,16 @@ class Ui_nxbrew_dl(object):
         nxbrew_dl.resize(1187, 907)
         self.actionDocumentation = QAction(nxbrew_dl)
         self.actionDocumentation.setObjectName(u"actionDocumentation")
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoHome))
+        self.actionDocumentation.setIcon(icon)
         self.actionIssues = QAction(nxbrew_dl)
         self.actionIssues.setObjectName(u"actionIssues")
+        icon1 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DialogWarning))
+        self.actionIssues.setIcon(icon1)
         self.actionAbout = QAction(nxbrew_dl)
         self.actionAbout.setObjectName(u"actionAbout")
+        icon2 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.HelpAbout))
+        self.actionAbout.setIcon(icon2)
         self.centralwidget = QWidget(nxbrew_dl)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -269,8 +275,8 @@ class Ui_nxbrew_dl(object):
 
         self.pushButtonRefresh = QPushButton(self.centralwidget)
         self.pushButtonRefresh.setObjectName(u"pushButtonRefresh")
-        icon = QIcon(QIcon.fromTheme(u"view-refresh"))
-        self.pushButtonRefresh.setIcon(icon)
+        icon3 = QIcon(QIcon.fromTheme(u"view-refresh"))
+        self.pushButtonRefresh.setIcon(icon3)
 
         self.horizontalLayoutSearch.addWidget(self.pushButtonRefresh)
 

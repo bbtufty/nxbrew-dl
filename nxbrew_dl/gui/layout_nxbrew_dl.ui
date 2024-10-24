@@ -680,6 +680,9 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionDocumentation">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::GoHome"/>
+   </property>
    <property name="text">
     <string>Documentation</string>
    </property>
@@ -688,6 +691,9 @@
    </property>
   </action>
   <action name="actionIssues">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DialogWarning"/>
+   </property>
    <property name="text">
     <string>Issues</string>
    </property>
@@ -696,6 +702,9 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+   </property>
    <property name="text">
     <string>About</string>
    </property>

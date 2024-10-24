@@ -1,6 +1,7 @@
 0.3 (Unreleased)
 ================
 
+- GUI updates [#12]
 - Logging updates [#11]
 - Update docs to reflect region preferences [#10]
 
