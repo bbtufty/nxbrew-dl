@@ -782,7 +782,7 @@ class NXBrew:
                         g_sanitized,
                     )
                     if os.path.exists(g_dir):
-                        self.logger.info(f"\t\tRemoving {g}")
+                        self.logger.info(f"\t\tRemoving {g}: {dl_mapping}")
                         shutil.rmtree(g_dir)
 
                 # And remove from the cache

@@ -165,6 +165,10 @@ def get_dl_dict(
                     for parsed_key in parsed_keys:
                         if parsed_key not in dl_dict[current_release]:
                             dl_dict[current_release][parsed_key] = []
+
+                        # Strip any extraneous whitespace
+                        parsed_dict[parsed_key]["full_name"] = parsed_dict[parsed_key]["full_name"].strip()
+
                         dl_dict[current_release][parsed_key].append(
                             parsed_dict[parsed_key]
                         )
@@ -287,6 +291,10 @@ def parse_base_game(
             # There's an edge case here where sometimes the base game actually has everything in there
             for h in href:
 
+                # If there's some weird phantom link, skip
+                if h.text == "":
+                    continue
+
                 found_edge_case = False
 
                 for dl_mapping in dl_mappings:
@@ -341,6 +349,11 @@ def parse_inline(
     href = tag.find_all("a", href=True)
 
     for h in href:
+
+        # If there's some weird phantom link, skip
+        if h.text == "":
+            continue
+
         for site in dl_sites:
             if site in h.text:
 
