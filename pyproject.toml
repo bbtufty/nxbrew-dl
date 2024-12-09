@@ -52,7 +52,7 @@ nxbrew-dl = "nxbrew_dl:run_nxbrew_gui"
 docs = [
     "sphinx == 8.1.0",
     "sphinx-automodapi == 0.18.0",
-    "sphinx-rtd-theme == 3.0.1",
+    "sphinx-rtd-theme == 3.0.2",
 ]
 
 [project.urls]
