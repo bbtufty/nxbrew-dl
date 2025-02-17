@@ -36,7 +36,7 @@ dependencies = [
     "curl_cffi == 0.7.4",
     "discordwebhook == 1.0.3",
     "logredactor == 0.0.2",
-    "lxml == 5.3.0",
+    "lxml == 5.3.1",
     "myjdapi == 1.1.9",
     "numpy == 2.2.2",
     "pathvalidate == 3.2.3",
