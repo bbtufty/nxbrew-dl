@@ -627,8 +627,29 @@ class NXBrew:
                         ]
                     )
 
-                # Wait for a bit, since adding links can take a hot second
-                time.sleep(5)
+                # Check that all links have been added
+                all_added = False
+                while not all_added:
+                    time.sleep(1)
+                    package_list = self.jd_device.linkgrabber.query_packages()
+
+                    found_package = False
+                    child_count = None
+
+                    for p in package_list:
+
+                        if found_package:
+                            continue
+
+                        if p["name"] == package_name:
+                            child_count = p["childCount"]
+                            found_package = True
+
+                    if not found_package:
+                        raise ValueError("Could not find package!")
+
+                    if child_count == len(dl_links):
+                        all_added = True
 
                 # Next up, we want to do a check that all the files are online and happy
                 package_list = self.jd_device.linkgrabber.query_packages()

@@ -102,6 +102,4 @@ def parse_languages(
             if long_match:
                 langs.append(long_langs[i])
 
-    reg = re.findall(r"\[(.*?)\]", t)
-
     return langs
