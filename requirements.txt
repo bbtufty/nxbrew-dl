@@ -19,7 +19,7 @@ PySide6_Addons==6.8.1
 PySide6_Essentials==6.8.1
 PyYAML==6.0.2
 requests==2.32.3
-setuptools==75.8.0
+setuptools==79.0.0
 shiboken6==6.8.1
 soupsieve==2.6
 typing_extensions==4.13.2
