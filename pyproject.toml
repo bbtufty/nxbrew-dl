@@ -38,7 +38,7 @@ dependencies = [
     "logredactor == 0.0.2",
     "lxml == 5.3.2",
     "myjdapi == 1.1.9",
-    "numpy == 2.2.4",
+    "numpy == 2.3.1",
     "pathvalidate == 3.2.3",
     "PySide6 == 6.9.0",
     "requests == 2.32.3",
