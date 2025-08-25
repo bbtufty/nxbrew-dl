@@ -8,7 +8,7 @@ curl_cffi==0.13.0
 discordwebhook==1.0.3
 idna==3.10
 logredactor==0.0.2
-lxml==6.0.0
+lxml==6.0.1
 myjdapi==1.1.10
 numpy==2.3.2
 pathvalidate==3.2.3
