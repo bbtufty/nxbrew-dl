@@ -11,7 +11,7 @@ logredactor==0.0.2
 lxml==6.0.0
 myjdapi==1.1.10
 numpy==2.3.2
-pathvalidate==3.2.3
+pathvalidate==3.3.1
 pycparser==2.22
 pycryptodome==3.23.0
 PySide6==6.9.1
