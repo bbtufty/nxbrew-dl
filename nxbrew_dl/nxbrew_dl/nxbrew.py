@@ -61,6 +61,7 @@ class NXBrew:
         to_download,
         progress_bar=None,
         progress_bar_label=None,
+        update_progressBar=None,
         general_config=None,
         regex_config=None,
         user_config=None,
@@ -156,6 +157,7 @@ class NXBrew:
         self.to_download = to_download
         self.progress_bar = progress_bar
         self.progress_bar_label = progress_bar_label
+        self.update_progressBar = update_progressBar
 
         self.dry_run = self.user_config.get("dry_run", False)
 
@@ -166,7 +168,7 @@ class NXBrew:
 
         if self.progress_bar is not None:
             # Reset progress bar to 0
-            self.progress_bar.setValue(0)
+            self.update_progressBar.emit(0)
 
         self.logger.info("")
         self.logger.info(f"=" * 80)
@@ -195,7 +197,7 @@ class NXBrew:
 
             if self.progress_bar is not None:
                 # Reset progress bar to 0
-                self.progress_bar.setValue(progress_val)
+                self.update_progressBar.emit(progress_val)
 
         # Clean up
         self.logger.info("Performing final cache/disk clean up")

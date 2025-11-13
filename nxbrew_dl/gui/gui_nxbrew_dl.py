@@ -233,7 +233,6 @@ class MainWindow(QMainWindow):
             )
             return False
 
-
     def update_display(self, text):
         """When using the search bar, show/hide rows
 
@@ -247,6 +246,9 @@ class MainWindow(QMainWindow):
                 self.game_table.showRow(r)
             else:
                 self.game_table.hideRow(r)
+
+    def update_progressbar_value(self, value):
+        self.nxbrew_worker.progress_bar.setValue(value)
 
     def load_table(self):
         """Load the game table, disable things until we're done"""
@@ -450,6 +452,7 @@ class MainWindow(QMainWindow):
 
         self.nxbrew_worker.moveToThread(self.nxbrew_thread)
         self.nxbrew_thread.started.connect(self.nxbrew_worker.run)
+        self.nxbrew_worker.update_progressBar.connect(self.update_progressbar_value)
 
         # Delete the thread once we're done
         self.nxbrew_worker.finished.connect(self.nxbrew_thread.quit)
@@ -527,6 +530,7 @@ class NXBrewWorker(QObject):
     """Handles running NXBrew so GUI doesn't hang"""
 
     finished = Signal()
+    update_progressBar = Signal(int)
 
     def __init__(
         self,
@@ -584,6 +588,7 @@ class NXBrewWorker(QObject):
                 user_config=self.user_config,
                 user_cache=self.user_cache,
                 logger=self.logger,
+                update_progressBar=self.update_progressBar,
             )
             nx.run()
         except (Exception, MYJDException):
