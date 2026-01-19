@@ -50,7 +50,7 @@ nxbrew-dl = "nxbrew_dl:run_nxbrew_gui"
 
 [project.optional-dependencies]
 docs = [
-    "sphinx == 8.2.3",
+    "sphinx == 9.0.4",
     "sphinx-automodapi == 0.20.0",
     "sphinx-rtd-theme == 3.0.2",
 ]
