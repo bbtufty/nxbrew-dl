@@ -45,7 +45,7 @@ jobs:
           --icon=nxbrew_dl/gui/img/logo.ico
           --onefile 
           -n nxbrew_dl.exe
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: dist/*
           token: ${{ secrets.GITHUB_TOKEN }}
