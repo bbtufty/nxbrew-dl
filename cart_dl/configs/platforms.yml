@@ -1,0 +1,426 @@
+# Platform definitions for cart-dl
+# Extensions listed in preference order (compressed/lossless first)
+
+platforms:
+  switch:
+    display: "Nintendo Switch"
+    extensions: [".nsp", ".xci", ".nsz", ".xcz"]
+    preferred_extensions: [".nsp", ".xci"]
+    filetype_regex:
+      base: ["NSP", "XCI", "NSZ"]
+      update: ["Update"]
+      dlc: ["DLC"]
+    sources:
+      http:
+        - name: "nxbrew.net"
+          url: "https://nxbrew.net"
+          index_path: "game-index/"
+          parser: "az_listing"
+        - name: "nswgame.com"
+          url: "https://nswgame.com"
+          index_path: "list-all-game-switch/"
+          parser: "nswgame"
+        - name: "switch-roms.com"
+          url: "https://switch-roms.com"
+          index_path: "post-sitemap.xml"
+          parser: "sitemap"
+        - name: "ziperto.com"
+          url: "https://www.ziperto.com"
+          index_path: "category/nintendo-switch-nsp/"
+          parser: "ziperto"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Nintendo Switch"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-Nintendo-Switch"
+          identifier: "nsw-No-Intro-Nintendo-Nintendo-Switch"
+    download_methods: ["http", "torrent", "archive"]
+
+  wiiu:
+    display: "Nintendo Wii U"
+    extensions: [".wux", ".wud", ".iso"]
+    preferred_extensions: [".wux"]
+    filetype_regex:
+      base: ["WUX", "WUD", "ISO"]
+    sources:
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Nintendo - Wii U - WUX"
+      archive:
+        - name: "ia"
+          collection: "Redump-Nintendo-WiiU"
+          identifier: "redump-nintendo-wiiu"
+    download_methods: ["torrent", "archive"]
+
+  wii:
+    display: "Nintendo Wii"
+    extensions: [".rvz", ".wbfs", ".wia", ".iso"]
+    preferred_extensions: [".rvz", ".wbfs"]
+    filetype_regex:
+      base: ["RVZ", "WBFS", "WIA", "ISO"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Wii"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/wii/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Nintendo - Wii - NKit RVZ [zstd-19-128k]"
+      archive:
+        - name: "ia"
+          collection: "Redump-Nintendo-Wii"
+          identifier: "redump-nintendo-wii"
+    download_methods: ["http", "torrent", "archive"]
+
+  gc:
+    display: "Nintendo GameCube"
+    extensions: [".rvz", ".nkit.iso", ".gcm", ".iso"]
+    preferred_extensions: [".rvz"]
+    filetype_regex:
+      base: ["RVZ", "ISO", "GCM"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/GameCube"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/gcube/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Nintendo - GameCube - NKit RVZ [zstd-19-128k]"
+      archive:
+        - name: "ia"
+          collection: "Redump-Nintendo-GameCube"
+          identifier: "redump-nintendo-gamecube"
+    download_methods: ["http", "torrent", "archive"]
+
+  "3ds":
+    display: "Nintendo 3DS"
+    extensions: [".cia", ".3ds", ".cxi", ".cci"]
+    preferred_extensions: [".cia"]
+    filetype_regex:
+      base: ["CIA", "3DS", "CXI", "CCI"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Nintendo 3DS"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/3ds/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Nintendo 3DS (Decrypted)"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-3DS"
+          identifier: "nointro-nintendo-3ds"
+    download_methods: ["http", "torrent", "archive"]
+
+  ds:
+    display: "Nintendo DS"
+    extensions: [".nds", ".dsi"]
+    preferred_extensions: [".nds"]
+    filetype_regex:
+      base: ["NDS", "DSI"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Nintendo DS"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/nds/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Nintendo DS (Decrypted)"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-DS"
+          identifier: "nointro-nintendo-ds"
+    download_methods: ["http", "torrent", "archive"]
+
+  gba:
+    display: "Nintendo GBA"
+    extensions: [".gba", ".agb"]
+    preferred_extensions: [".gba"]
+    filetype_regex:
+      base: ["GBA"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Game Boy Adv"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/gba/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Game Boy Advance"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-GameBoyAdvance"
+          identifier: "nointro-nintendo-gba"
+    download_methods: ["http", "torrent", "archive"]
+
+  n64:
+    display: "Nintendo 64"
+    extensions: [".z64", ".n64", ".v64"]
+    preferred_extensions: [".z64"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Nintendo 64"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/n64/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Nintendo 64 (BigEndian)"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-Nintendo64"
+          identifier: "nointro-nintendo-n64"
+    download_methods: ["http", "torrent", "archive"]
+
+  snes:
+    display: "SNES"
+    extensions: [".sfc", ".smc", ".bs"]
+    preferred_extensions: [".sfc"]
+    filetype_regex:
+      base: ["SFC", "SMC"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Super Nintendo"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/snes/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Super Nintendo Entertainment System"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-SNES"
+          identifier: "nointro-nintendo-snes"
+    download_methods: ["http", "torrent", "archive"]
+
+  nes:
+    display: "NES"
+    extensions: [".nes", ".fds", ".unf"]
+    preferred_extensions: [".nes"]
+    filetype_regex:
+      base: ["NES", "FDS"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/NES"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/nes/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Nintendo - Nintendo Entertainment System (Headered)"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Nintendo-NES"
+          identifier: "nointro-nintendo-nes"
+    download_methods: ["http", "torrent", "archive"]
+
+  ps4:
+    display: "PlayStation 4"
+    extensions: [".pkg"]
+    preferred_extensions: [".pkg"]
+    filetype_regex:
+      base: ["PKG"]
+      update: ["Patch"]
+      dlc: ["DLC", "Unlock"]
+    sources:
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sony - PlayStation 4"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sony-PlayStation4"
+          identifier: "redump-sony-ps4"
+    download_methods: ["torrent", "archive"]
+
+  ps3:
+    display: "PlayStation 3"
+    extensions: [".iso", ".pkg"]
+    preferred_extensions: []
+    filetype_regex:
+      base: ["ISO", "PKG"]
+      update: ["Update"]
+      dlc: ["DLC", "PKG"]
+    sources:
+      http:
+        - name: "nopaystation"
+          type: "tsv"
+          tsv_types: ["ps3_games", "ps3_dlc", "ps3_demos"]
+        - name: "vimm"
+          url: "https://vimm.net/vault/PS3"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/ps3/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sony - PlayStation 3"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sony-PlayStation3"
+          identifier: "redump-sony-ps3"
+    download_methods: ["http", "torrent", "archive"]
+
+  ps2:
+    display: "PlayStation 2"
+    extensions: [".chd", ".iso", ".bin"]
+    preferred_extensions: [".chd"]
+    filetype_regex:
+      base: ["CHD", "ISO", "BIN"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/PS2"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/ps2/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sony - PlayStation 2"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sony-PlayStation2"
+          identifier: "redump-sony-ps2"
+    download_methods: ["http", "torrent", "archive"]
+
+  ps1:
+    display: "PlayStation 1"
+    extensions: [".chd", ".pbp", ".bin", ".cue", ".iso"]
+    preferred_extensions: [".chd", ".pbp"]
+    filetype_regex:
+      base: ["CHD", "PBP", "BIN", "CUE", "ISO"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/PlayStation"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/psx/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sony - PlayStation"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sony-PlayStation"
+          identifier: "redump-sony-psx"
+    download_methods: ["http", "torrent", "archive"]
+
+  psp:
+    display: "PSP"
+    extensions: [".cso", ".pbp", ".iso"]
+    preferred_extensions: [".cso", ".pbp"]
+    filetype_regex:
+      base: ["CSO", "PBP", "ISO"]
+    sources:
+      http:
+        - name: "nopaystation"
+          type: "tsv"
+          tsv_types: ["psp_games", "psp_dlc", "psp_demos"]
+        - name: "vimm"
+          url: "https://vimm.net/vault/PS Portable"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/psp/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sony - PlayStation Portable"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sony-PlayStationPortable"
+          identifier: "redump-sony-psp"
+    download_methods: ["http", "torrent", "archive"]
+
+  xbox360:
+    display: "Xbox 360"
+    extensions: [".zar", ".iso", ".xex"]
+    preferred_extensions: [".zar"]
+    filetype_regex:
+      base: ["ZAR", "ISO", "XEX"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Xbox 360"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/xbox360/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Microsoft - Xbox 360"
+      archive:
+        - name: "ia"
+          collection: "Redump-Microsoft-Xbox360"
+          identifier: "redump-microsoft-xbox360"
+    download_methods: ["http", "torrent", "archive"]
+
+  xbox:
+    display: "Xbox"
+    extensions: [".iso", ".xbe"]
+    preferred_extensions: [".iso"]
+    filetype_regex:
+      base: ["ISO", "XBE"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Xbox"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/xbox/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Microsoft - Xbox"
+      archive:
+        - name: "ia"
+          collection: "Redump-Microsoft-Xbox"
+          identifier: "redump-microsoft-xbox"
+    download_methods: ["http", "torrent", "archive"]
+
+  dc:
+    display: "Dreamcast"
+    extensions: [".chd", ".gdi", ".cdi", ".iso"]
+    preferred_extensions: [".chd", ".gdi"]
+    filetype_regex:
+      base: ["CHD", "GDI", "CDI", "ISO"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Dreamcast"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/dreamcast/"
+      torrent:
+        - name: "minerva"
+          collection: "Redump/Sega - Dreamcast"
+      archive:
+        - name: "ia"
+          collection: "Redump-Sega-Dreamcast"
+          identifier: "redump-sega-dreamcast"
+    download_methods: ["http", "torrent", "archive"]
+
+  genesis:
+    display: "Genesis / Mega Drive"
+    extensions: [".md", ".gen", ".bin", ".smd"]
+    preferred_extensions: [".md"]
+    filetype_regex:
+      base: ["MD", "GEN", "BIN", "SMD"]
+    sources:
+      http:
+        - name: "vimm"
+          url: "https://vimm.net/vault/Genesis"
+        - name: "coolrom"
+          url: "https://coolrom.com/roms/sega/"
+      torrent:
+        - name: "minerva"
+          collection: "No-Intro/Sega - Mega Drive - Genesis"
+      archive:
+        - name: "ia"
+          collection: "No-Intro-Sega-MegaDriveGenesis"
+          identifier: "nointro-sega-genesis"
+    download_methods: ["http", "torrent", "archive"]
+
+# Minerva
+minerva_base: "https://minerva-archive.org"
+minerva_assets: "https://minerva-archive.org/assets/Minerva_Myrient_v0.3"
+
+# Internet Archive
+ia_base: "https://archive.org"
+ia_metadata_api: "https://archive.org/metadata"
+ia_download_url: "https://archive.org/download"
+
+# Default platform
+default_platform: "switch"

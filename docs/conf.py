@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'nxbrew_dl'
+project = 'cart_dl'
 copyright = '2024, bbtufty'
 author = 'bbtufty'
 release = '0.7.3'

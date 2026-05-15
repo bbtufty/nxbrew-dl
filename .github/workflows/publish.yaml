@@ -1,4 +1,4 @@
-name: Publish
+﻿name: Publish
 
 on: [push, pull_request]
 
@@ -39,12 +39,12 @@ jobs:
           pip install -e .
       - name: Build package
         run: >
-          pyinstaller nxbrew_dl_gui.py 
-          --copy-metadata nxbrew_dl 
-          --collect-data nxbrew_dl
-          --icon=nxbrew_dl/gui/img/logo.ico
+          pyinstaller cart_dl_gui.py 
+          --copy-metadata cart_dl 
+          --collect-data cart_dl
+          --icon=cart_dl/gui/img/logo.ico
           --onefile 
-          -n nxbrew_dl.exe
+          -n cart_dl.exe
       - uses: softprops/action-gh-release@v2
         with:
           files: dist/*

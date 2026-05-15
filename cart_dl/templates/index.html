@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>cart-dl</title>
+<style>
+:root{--bg:#0f0f0f;--bg2:#1a1a1a;--bg3:#252525;--fg:#e0e0e0;--fg2:#888;--accent:#4a9eff;--green:#4caf50;--orange:#ff9800;--red:#f44336;--grey:#555;--border:#333}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:13px/1.5 'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);height:100vh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--bg2);border-bottom:1px solid var(--border)}
+header h1{font-size:16px;color:var(--accent);white-space:nowrap}
+header input{flex:1;max-width:400px;padding:6px 10px;background:var(--bg3);border:1px solid var(--border);color:var(--fg);border-radius:4px;outline:none}
+header input:focus{border-color:var(--accent)}
+header button{padding:6px 14px;background:var(--bg3);border:1px solid var(--border);color:var(--fg);border-radius:4px;cursor:pointer;white-space:nowrap}
+header button:hover{background:var(--accent);border-color:var(--accent)}
+header button.primary{background:var(--accent);border-color:var(--accent)}
+.stats{padding:6px 16px;font-size:11px;color:var(--fg2);display:flex;gap:16px}
+.stats span{white-space:nowrap}
+#table-wrap{flex:1;overflow-y:auto;overflow-x:hidden}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+thead{position:sticky;top:0;z-index:2}
+th{padding:8px 6px;background:var(--bg2);border-bottom:2px solid var(--border);font-size:11px;text-align:left;font-weight:600;color:var(--fg2);cursor:pointer;user-select:none}
+th:hover{color:var(--fg)}
+th:nth-child(1){width:32px;text-align:center}
+th:nth-child(2){width:auto}
+th:nth-child(3){width:54px;text-align:center}
+th:nth-child(4){width:32px;text-align:center}
+th:nth-child(5){width:40px;text-align:center}
+th:nth-child(6){width:40px;text-align:center}
+th:nth-child(7){width:40px;text-align:center}
+th:nth-child(8){width:40px;text-align:center}
+th:nth-child(9){width:32px;text-align:center}
+td{padding:6px;border-bottom:1px solid var(--border);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;content-visibility:auto;contain-intrinsic-size:32px}
+td:nth-child(1){text-align:center}
+td:nth-child(3){text-align:center;font-weight:600}
+td:nth-child(4){text-align:center;font-size:9px}
+td:nth-child(5),td:nth-child(6),td:nth-child(7){text-align:center;font-size:10px}
+td:nth-child(8){text-align:center;font-size:10px;color:var(--orange)}
+tr{cursor:pointer}
+tr:hover{background:var(--bg2)}
+tr.selected{background:var(--bg3)}
+.rating-high{color:var(--green)}
+.rating-mid{color:var(--orange)}
+.rating-low{color:var(--red)}
+.rating-none{color:var(--grey)}
+.badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600}
+.badge-yes{background:var(--green);color:#fff}
+.badge-no{background:var(--red);color:#fff}
+.badge-unk{background:var(--orange);color:#fff}
+#progress{display:none;padding:8px 16px;background:var(--bg2);border-top:1px solid var(--border);font-size:12px}
+#progress-bar{height:4px;background:var(--accent);border-radius:2px;transition:width .3s}
+#log{max-height:150px;overflow-y:auto;font-family:monospace;font-size:11px;color:var(--fg2);padding:4px 0}
+#log div{padding:1px 0}
+footer{padding:6px 16px;background:var(--bg2);border-top:1px solid var(--border);display:flex;gap:12px;font-size:11px;color:var(--fg2)}
+.settings-panel{display:none;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--border);gap:8px;flex-wrap:wrap}
+.settings-panel label{font-size:11px;color:var(--fg2)}
+.settings-panel input,.settings-panel select{padding:4px 8px;background:var(--bg3);border:1px solid var(--border);color:var(--fg);border-radius:3px;font-size:11px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🛒 cart-dl</h1>
+  <input id="search" placeholder="Filter games..." autofocus oninput="doSearch()">
+  <button onclick="selectAll()">☑ All</button>
+  <button onclick="selectNone()">☐ None</button>
+  <button onclick="selectVisible()">☑ Visible</button>
+  <button class="primary" onclick="downloadSelected()">⬇ Download Selected</button>
+  <button onclick="refreshGames()">🔄 Refresh</button>
+  <button onclick="toggleSettings()">⚙</button>
+</header>
+<div id="platform-bar" style="padding:4px 16px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;font-size:11px">
+  <b style="color:var(--fg2);margin-right:4px">Platforms:</b>
+  <label><input type="checkbox" checked onchange="filterPlatforms()" value="switch"> Switch</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="wiiu"> WiiU</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="wii"> Wii</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="gc"> GC</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="3ds"> 3DS</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="ds"> DS</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="gba"> GBA</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="n64"> N64</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="snes"> SNES</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="nes"> NES</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="ps4"> PS4</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="ps3"> PS3</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="ps2"> PS2</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="ps1"> PS1</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="psp"> PSP</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="xbox360"> X360</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="dc"> DC</label>
+  <label><input type="checkbox" onchange="filterPlatforms()" value="genesis"> Genesis</label>
+</div>
+<div class="settings-panel" id="settings">
+  <label>Source: <input id="cfg-source" placeholder="https://nxbrew.net" size="30"></label>
+  <label>Min Rating: <input id="cfg-rating" type="number" min="0" max="100" value="50" size="4"></label>
+  <label><input type="checkbox" id="cfg-vn" checked> No VN</label>
+  <label><input type="checkbox" id="cfg-sw" checked> No Shovel</label>
+  <label><input type="checkbox" id="cfg-switch" checked> Switch Only</label>
+  <label><input type="checkbox" id="cfg-multi"> No Multi-Plat</label>
+  <button onclick="saveConfig()">Save Config</button>
+</div>
+<div class="stats">
+  <span id="stat-total">Games: -</span>
+  <span id="stat-rated">Rated: -</span>
+  <span id="stat-visible">Showing: -</span>
+  <span id="stat-selected">Selected: 0</span>
+</div>
+<div id="table-wrap"><table>
+<thead><tr>
+  <th>☐</th><th>Name</th><th>Rating</th><th>Plat</th><th>Base</th><th>Upd</th><th>DLC</th><th>Alt</th>
+</tr></thead>
+<tbody id="tbody"></tbody>
+</table></div>
+<footer>
+  <span id="footer-status">Ready</span>
+  <span style="flex:1"></span>
+  <span id="footer-sources"></span>
+</footer>
+<div id="progress">
+  <div style="display:flex;justify-content:space-between"><span id="prog-text">-</span><span id="prog-pct">-</span></div>
+  <div id="progress-bar" style="width:0%"></div>
+  <div id="log"></div>
+</div>
+<script>
+let allGames = [];
+let totalGames = 0;
+let pageSize = 200;
+let currentOffset = 0;
+let selected = new Set();
+let sortCol = 2, sortDir = -1;
+let loading = false;
+
+async function loadGames(reset) {
+  if (loading) return;
+  loading = true;
+  if (reset) { allGames = []; currentOffset = 0; selected.clear(); }
+  document.getElementById('footer-status').textContent = 'Loading...';
+  try {
+    let q = document.getElementById('search').value || '';
+    let url = `/api/games?offset=${currentOffset}&limit=${pageSize}&sort=${sortCol===2?'rating':'name'}&order=${sortDir<0?'desc':'asc'}`;
+    let platforms = [...document.querySelectorAll('#platform-bar input:checked')].map(cb => cb.value).join(',');
+    if (platforms) url += '&platform=' + encodeURIComponent(platforms);
+    if (q) url += '&q=' + encodeURIComponent(q);
+    let resp = await fetch(url);
+    let data = await resp.json();
+    if (reset) { allGames = data.games; totalGames = data.total; }
+    else { allGames = allGames.concat(data.games); totalGames = data.total; }
+    currentOffset += data.games.length;
+    render();
+    updateStats();
+    document.getElementById('footer-status').textContent = `Loaded ${allGames.length} of ${totalGames.toLocaleString()} games`;
+    loadHealth();
+  } catch(e) {
+    document.getElementById('footer-status').textContent = 'Error: ' + e.message;
+  }
+  loading = false;
+}
+
+function updateStats() {
+  document.getElementById('stat-total').textContent = `Games: ${totalGames.toLocaleString()}`;
+  let rated = allGames.filter(g => g.rating !== null).length;
+  document.getElementById('stat-rated').textContent = `Rated: ${rated.toLocaleString()}`;
+  document.getElementById('stat-visible').textContent = `Loaded: ${allGames.length.toLocaleString()}`;
+}
+
+function doSearch() {
+  currentOffset = 0; allGames = [];
+  loadGames(true);
+}
+
+function sort(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = -1; }
+  currentOffset = 0; allGames = [];
+  loadGames(true);
+}
+
+// Infinite scroll
+document.getElementById('table-wrap').addEventListener('scroll', function() {
+  let el = this;
+  if (el.scrollTop + el.clientHeight >= el.scrollHeight - 200 && !loading && allGames.length < totalGames) {
+    loadGames(false);
+  }
+});
+
+function filterPlatforms() { currentOffset = 0; allGames = []; loadGames(true); }
+
+function render() {
+  let tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  for (let i = 0; i < allGames.length; i++) {
+    let g = allGames[i];
+    let tr = document.createElement('tr');
+    if (selected.has(i)) tr.classList.add('selected');
+    tr.onclick = (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      e.ctrlKey || e.metaKey ? toggleSelect(i) : (selected.clear(), selected.add(i), render());
+    };
+    tr.innerHTML = `
+      <td><input type="checkbox" ${selected.has(i)?'checked':''} onclick="toggleSelect(${i})"></td>
+      <td title="${g.long_name||''}">${g.name||'?'}</td>
+      <td class="${g.rating>=80?'rating-high':g.rating>=60?'rating-mid':g.rating?'rating-low':'rating-none'}">${g.rating||'?'}</td>
+      <td style="text-align:center;font-size:9px;color:var(--fg2)">${g.platform||'?'}</td>
+      <td><span class="badge ${g.has_nsp||g.has_base?'badge-yes':'badge-no'}">${g.platform==='switch'?(g.has_nsp?'NSP':(g.has_xci?'XCI':'---')):(g.has_nsp||g.has_base?'YES':'---')}</span></td>
+      <td><span class="badge ${g.has_update?'badge-yes':'badge-no'}">${g.has_update?'Upd':'---'}</span></td>
+      <td><span class="badge ${g.has_dlc?'badge-yes':'badge-no'}">${g.has_dlc?'DLC':'---'}</span></td>
+      <td style="text-align:center;font-size:10px;color:var(--orange)">${g.alt_urls && g.alt_urls.length ? g.alt_urls.length : ''}</td>`;
+    tbody.appendChild(tr);
+  }
+  updateSelectedCount();
+}
+
+function toggleSelect(idx) {
+  selected.has(idx) ? selected.delete(idx) : selected.add(idx);
+  render();
+}
+function selectAll() { allGames.forEach((_,i) => selected.add(i)); render(); }
+function selectNone() { selected.clear(); render(); }
+function selectVisible() { allGames.forEach((_,i) => selected.add(i)); render(); }
+function updateSelectedCount() { document.getElementById('stat-selected').textContent = `Selected: ${selected.size}`; }
+
+async function downloadSelected() {
+  if (selected.size === 0) return alert('No games selected');
+  let urls = [...selected].map(i => allGames[i].url);
+  document.getElementById('progress').style.display = 'block';
+  document.getElementById('log').innerHTML = '';
+  document.getElementById('progress-bar').style.width = '0%';
+
+  // POST to start download
+  let r = await fetch('/api/download', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({games:urls})});
+  let data = await r.json();
+
+  // Poll status every 1s
+  if (downloadPoll) clearInterval(downloadPoll);
+  downloadPoll = setInterval(async () => {
+    let s = await (await fetch('/api/download/status')).json();
+    document.getElementById('prog-text').textContent = `${s.current}/${s.total}: ${s.game}`;
+    document.getElementById('prog-pct').textContent = s.total ? Math.round(s.current/s.total*100) + '%' : '0%';
+    document.getElementById('progress-bar').style.width = s.total ? (s.current/s.total*100) + '%' : '0%';
+    document.getElementById('log').innerHTML = s.log.map(l => `<div>${l}</div>`).join('');
+    document.getElementById('log').scrollTop = document.getElementById('log').scrollHeight;
+    if (!s.running) {
+      clearInterval(downloadPoll);
+      downloadPoll = null;
+      document.getElementById('progress').style.display = 'none';
+      document.getElementById('footer-status').textContent = 'Downloads complete';
+    }
+  }, 1000);
+}
+
+async function refreshGames() {
+  document.getElementById('footer-status').textContent = 'Refreshing...';
+  let evt = new EventSource('/api/games/refresh?' + Date.now());
+  evt.onmessage = (e) => {
+    if (e.data.startsWith('{')) {
+      let d = JSON.parse(e.data);
+      document.getElementById('footer-status').textContent = `Scraped ${d.scraped} games`;
+    }
+  };
+  evt.addEventListener('status', async (e) => {
+    if (e.data === 'done') { evt.close(); await loadGames(); }
+  });
+}
+
+async function loadHealth() {
+  try {
+    let r = await fetch('/api/health');
+    let h = await r.json();
+    document.getElementById('footer-sources').textContent = `Precache: ${(h.precache_size||0).toLocaleString()} | Uptime: ${h.uptime}s`;
+  } catch(e) {}
+}
+
+function toggleSettings() {
+  let p = document.getElementById('settings');
+  p.style.display = p.style.display === 'flex' ? 'none' : 'flex';
+  if (p.style.display === 'flex') loadConfigToForm();
+}
+
+async function loadConfigToForm() {
+  try {
+    let r = await fetch('/api/config');
+    let c = await r.json();
+    document.getElementById('cfg-source').value = c.source_url || 'https://nxbrew.net';
+    document.getElementById('cfg-rating').value = c.igdb_min_rating || 50;
+    document.getElementById('cfg-vn').checked = c.igdb_exclude_vn !== false;
+    document.getElementById('cfg-sw').checked = c.igdb_exclude_shovelware !== false;
+    document.getElementById('cfg-switch').checked = c.igdb_switch_only !== false;
+    document.getElementById('cfg-multi').checked = c.igdb_exclude_multi_platform === true;
+  } catch(e) {}
+}
+
+async function saveConfig() {
+  let cfg = {
+    source_url: document.getElementById('cfg-source').value,
+    igdb_min_rating: parseInt(document.getElementById('cfg-rating').value),
+    igdb_exclude_vn: document.getElementById('cfg-vn').checked,
+    igdb_exclude_shovelware: document.getElementById('cfg-sw').checked,
+    igdb_switch_only: document.getElementById('cfg-switch').checked,
+    igdb_exclude_multi_platform: document.getElementById('cfg-multi').checked,
+  };
+  await fetch('/api/config', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(cfg)});
+  document.getElementById('footer-status').textContent = 'Config saved';
+  document.getElementById('settings').style.display = 'none';
+}
+
+document.querySelectorAll('th').forEach((th, i) => {
+  th.onclick = () => sort(i);
+});
+
+loadGames();
+</script>
+</body>
+</html>

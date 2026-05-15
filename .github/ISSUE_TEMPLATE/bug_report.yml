@@ -41,4 +41,4 @@ body:
     id: log
     attributes:
       label: Log
-      description: Attach the relevant log file(s) (log/NXBrew.log), which will have sensitive info redacted
+      description: Attach the relevant log file(s) (log/CartDL.log), which will have sensitive info redacted

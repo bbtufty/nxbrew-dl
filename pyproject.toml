@@ -1,8 +1,8 @@
 [project]
 
-name = "nxbrew_dl"
-version = "0.7.3"
-description = "NXBrew Downloader"
+name = "cart-dl"
+version = "0.8.0"
+description = "Cart-dl: Switch ROM downloader with IGDB quality filtering"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {file = "LICENSE"}
@@ -35,6 +35,7 @@ dependencies = [
     "colorlog == 6.10.1",
     "curl_cffi == 0.13.0",
     "discordwebhook == 1.0.3",
+    "fastapi >= 0.110.0",
     "logredactor == 0.0.2",
     "lxml == 6.0.2",
     "myjdapi == 1.1.10",
@@ -43,10 +44,13 @@ dependencies = [
     "PySide6 == 6.10.1",
     "requests == 2.32.5",
     "PyYAML == 6.0.3",
+    "sse-starlette >= 2.0.0",
+    "uvicorn[standard] >= 0.30.0",
 ]
 
 [project.scripts]
-nxbrew-dl = "nxbrew_dl:run_nxbrew_gui"
+cart-dl = "cart_dl.server:run_server"
+cart-dl-gui = "cart_dl:run_CartDL_gui"
 
 [project.optional-dependencies]
 docs = [
@@ -56,9 +60,9 @@ docs = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/bbtufty/nxbrew-dl"
-"Bug Reports" = "https://github.com/bbtufty/nxbrew-dl/issues"
-"Source" = "https://github.com/bbtufty/nxbrew-dl"
+"Homepage" = "https://git.johagan.au/jack/cart-dl"
+"Bug Reports" = "https://git.johagan.au/jack/cart-dl/issues"
+"Source" = "https://git.johagan.au/jack/cart-dl"
 
 [tool.setuptools.packages.find]
 exclude = ["log/*"]

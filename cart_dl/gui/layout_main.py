@@ -1,0 +1,515 @@
+# -*- coding: utf-8 -*-
+
+################################################################################
+## Form generated from reading UI file 'layout_cart_dl.ui'
+##
+## Created by: Qt User Interface Compiler version 6.10.0
+##
+## WARNING! All changes made in this file will be lost when recompiling UI file!
+################################################################################
+
+from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
+    QMetaObject, QObject, QPoint, QRect,
+    QSize, QTime, QUrl, Qt)
+from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
+    QCursor, QFont, QFontDatabase, QGradient,
+    QIcon, QImage, QKeySequence, QLinearGradient,
+    QPainter, QPalette, QPixmap, QRadialGradient,
+    QTransform)
+from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QButtonGroup,
+    QCheckBox, QFrame, QHBoxLayout, QHeaderView,
+    QLabel, QLineEdit, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QRadioButton,
+    QSizePolicy, QSpacerItem, QStatusBar, QTableWidget,
+    QTableWidgetItem, QVBoxLayout, QWidget)
+
+class Ui_cart_dl(object):
+    def setupUi(self, cart_dl):
+        if not cart_dl.objectName():
+            cart_dl.setObjectName(u"cart_dl")
+        cart_dl.resize(1187, 920)
+        self.actionDocumentation = QAction(cart_dl)
+        self.actionDocumentation.setObjectName(u"actionDocumentation")
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.GoHome))
+        self.actionDocumentation.setIcon(icon)
+        self.actionIssues = QAction(cart_dl)
+        self.actionIssues.setObjectName(u"actionIssues")
+        icon1 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DialogWarning))
+        self.actionIssues.setIcon(icon1)
+        self.actionAbout = QAction(cart_dl)
+        self.actionAbout.setObjectName(u"actionAbout")
+        icon2 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.HelpAbout))
+        self.actionAbout.setIcon(icon2)
+        self.centralwidget = QWidget(cart_dl)
+        self.centralwidget.setObjectName(u"centralwidget")
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayoutConfigGames = QHBoxLayout()
+        self.horizontalLayoutConfigGames.setObjectName(u"horizontalLayoutConfigGames")
+        self.verticalLayoutConfig = QVBoxLayout()
+        self.verticalLayoutConfig.setObjectName(u"verticalLayoutConfig")
+        self.verticalSpacer_7 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_7)
+
+        self.labelCartDLURL = QLabel(self.centralwidget)
+        self.labelCartDLURL.setObjectName(u"labelCartDLURL")
+
+        self.verticalLayoutConfig.addWidget(self.labelCartDLURL)
+
+        self.lineEditCartDLURL = QLineEdit(self.centralwidget)
+        self.lineEditCartDLURL.setObjectName(u"lineEditCartDLURL")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Minimum)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.lineEditCartDLURL.sizePolicy().hasHeightForWidth())
+        self.lineEditCartDLURL.setSizePolicy(sizePolicy)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditCartDLURL)
+
+        self.verticalSpacer = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer)
+
+        self.labelDownloadDir = QLabel(self.centralwidget)
+        self.labelDownloadDir.setObjectName(u"labelDownloadDir")
+
+        self.verticalLayoutConfig.addWidget(self.labelDownloadDir)
+
+        self.horizontalLayout = QHBoxLayout()
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.lineEditDownloadDir = QLineEdit(self.centralwidget)
+        self.lineEditDownloadDir.setObjectName(u"lineEditDownloadDir")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.lineEditDownloadDir.sizePolicy().hasHeightForWidth())
+        self.lineEditDownloadDir.setSizePolicy(sizePolicy1)
+        self.lineEditDownloadDir.setMinimumSize(QSize(250, 0))
+
+        self.horizontalLayout.addWidget(self.lineEditDownloadDir)
+
+        self.pushButtonDownloadDir = QPushButton(self.centralwidget)
+        self.pushButtonDownloadDir.setObjectName(u"pushButtonDownloadDir")
+
+        self.horizontalLayout.addWidget(self.pushButtonDownloadDir)
+
+
+        self.verticalLayoutConfig.addLayout(self.horizontalLayout)
+
+        self.verticalSpacer_3 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_3)
+
+        self.labelJDownloaderDevice = QLabel(self.centralwidget)
+        self.labelJDownloaderDevice.setObjectName(u"labelJDownloaderDevice")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderDevice)
+
+        self.lineEditJDownloaderDevice = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderDevice.setObjectName(u"lineEditJDownloaderDevice")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderDevice.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderDevice.setSizePolicy(sizePolicy1)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderDevice)
+
+        self.labelJDownloaderUser = QLabel(self.centralwidget)
+        self.labelJDownloaderUser.setObjectName(u"labelJDownloaderUser")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderUser)
+
+        self.lineEditJDownloaderUser = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderUser.setObjectName(u"lineEditJDownloaderUser")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderUser.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderUser.setSizePolicy(sizePolicy1)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderUser)
+
+        self.labelJDownloaderPass = QLabel(self.centralwidget)
+        self.labelJDownloaderPass.setObjectName(u"labelJDownloaderPass")
+
+        self.verticalLayoutConfig.addWidget(self.labelJDownloaderPass)
+
+        self.lineEditJDownloaderPass = QLineEdit(self.centralwidget)
+        self.lineEditJDownloaderPass.setObjectName(u"lineEditJDownloaderPass")
+        sizePolicy1.setHeightForWidth(self.lineEditJDownloaderPass.sizePolicy().hasHeightForWidth())
+        self.lineEditJDownloaderPass.setSizePolicy(sizePolicy1)
+        self.lineEditJDownloaderPass.setEchoMode(QLineEdit.EchoMode.Password)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditJDownloaderPass)
+
+        self.verticalSpacer_4 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_4)
+
+        self.labelGameDLOptions = QLabel(self.centralwidget)
+        self.labelGameDLOptions.setObjectName(u"labelGameDLOptions")
+
+        self.verticalLayoutConfig.addWidget(self.labelGameDLOptions)
+
+        self.radioButtonPreferNSP = QRadioButton(self.centralwidget)
+        self.buttonGroupPreferNSPXCI = QButtonGroup(cart_dl)
+        self.buttonGroupPreferNSPXCI.setObjectName(u"buttonGroupPreferNSPXCI")
+        self.buttonGroupPreferNSPXCI.addButton(self.radioButtonPreferNSP)
+        self.radioButtonPreferNSP.setObjectName(u"radioButtonPreferNSP")
+        self.radioButtonPreferNSP.setChecked(True)
+
+        self.verticalLayoutConfig.addWidget(self.radioButtonPreferNSP)
+
+        self.radioButtonPreferXCI = QRadioButton(self.centralwidget)
+        self.buttonGroupPreferNSPXCI.addButton(self.radioButtonPreferXCI)
+        self.radioButtonPreferXCI.setObjectName(u"radioButtonPreferXCI")
+
+        self.verticalLayoutConfig.addWidget(self.radioButtonPreferXCI)
+
+        self.verticalSpacer_2 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_2)
+
+        self.labelGameAdditionalFiles = QLabel(self.centralwidget)
+        self.labelGameAdditionalFiles.setObjectName(u"labelGameAdditionalFiles")
+
+        self.verticalLayoutConfig.addWidget(self.labelGameAdditionalFiles)
+
+        self.checkBoxDownloadUpdates = QCheckBox(self.centralwidget)
+        self.checkBoxDownloadUpdates.setObjectName(u"checkBoxDownloadUpdates")
+        self.checkBoxDownloadUpdates.setChecked(True)
+
+        self.verticalLayoutConfig.addWidget(self.checkBoxDownloadUpdates)
+
+        self.checkBoxDownloadDLC = QCheckBox(self.centralwidget)
+        self.checkBoxDownloadDLC.setObjectName(u"checkBoxDownloadDLC")
+        self.checkBoxDownloadDLC.setChecked(True)
+
+        self.verticalLayoutConfig.addWidget(self.checkBoxDownloadDLC)
+
+        self.verticalSpacer_6 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_6)
+
+        self.labelGameAdvancedOptions = QLabel(self.centralwidget)
+        self.labelGameAdvancedOptions.setObjectName(u"labelGameAdvancedOptions")
+
+        self.verticalLayoutConfig.addWidget(self.labelGameAdvancedOptions)
+
+        self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_3)
+
+        self.pushButtonRegionLanguage = QPushButton(self.centralwidget)
+        self.pushButtonRegionLanguage.setObjectName(u"pushButtonRegionLanguage")
+        sizePolicy1.setHeightForWidth(self.pushButtonRegionLanguage.sizePolicy().hasHeightForWidth())
+        self.pushButtonRegionLanguage.setSizePolicy(sizePolicy1)
+
+        self.horizontalLayout_2.addWidget(self.pushButtonRegionLanguage)
+
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_4)
+
+
+        self.verticalLayoutConfig.addLayout(self.horizontalLayout_2)
+
+        self.checkBoxDryRun = QCheckBox(self.centralwidget)
+        self.checkBoxDryRun.setObjectName(u"checkBoxDryRun")
+        self.checkBoxDryRun.setChecked(False)
+
+        self.verticalLayoutConfig.addWidget(self.checkBoxDryRun)
+
+        self.verticalSpacer_8 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_8)
+
+        self.labelDiscordURL = QLabel(self.centralwidget)
+        self.labelDiscordURL.setObjectName(u"labelDiscordURL")
+
+        self.verticalLayoutConfig.addWidget(self.labelDiscordURL)
+
+        self.lineEditDiscordURL = QLineEdit(self.centralwidget)
+        self.lineEditDiscordURL.setObjectName(u"lineEditDiscordURL")
+        sizePolicy1.setHeightForWidth(self.lineEditDiscordURL.sizePolicy().hasHeightForWidth())
+        self.lineEditDiscordURL.setSizePolicy(sizePolicy1)
+        self.lineEditDiscordURL.setEchoMode(QLineEdit.EchoMode.Normal)
+
+        self.verticalLayoutConfig.addWidget(self.lineEditDiscordURL)
+
+        self.verticalSpacer_5 = QSpacerItem(330, 13, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayoutConfig.addItem(self.verticalSpacer_5)
+
+
+        self.horizontalLayoutConfigGames.addLayout(self.verticalLayoutConfig)
+
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayoutConfigGames.addItem(self.horizontalSpacer)
+
+        self.verticalLayoutGames = QVBoxLayout()
+        self.verticalLayoutGames.setObjectName(u"verticalLayoutGames")
+        self.horizontalLayoutSearch = QHBoxLayout()
+        self.horizontalLayoutSearch.setObjectName(u"horizontalLayoutSearch")
+        self.labelSearch = QLabel(self.centralwidget)
+        self.labelSearch.setObjectName(u"labelSearch")
+
+        self.horizontalLayoutSearch.addWidget(self.labelSearch)
+
+        self.horizontalSpacerSearch = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayoutSearch.addItem(self.horizontalSpacerSearch)
+
+        self.lineEditSearch = QLineEdit(self.centralwidget)
+        self.lineEditSearch.setObjectName(u"lineEditSearch")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.lineEditSearch.sizePolicy().hasHeightForWidth())
+        self.lineEditSearch.setSizePolicy(sizePolicy2)
+
+        self.horizontalLayoutSearch.addWidget(self.lineEditSearch)
+
+        self.horizontalSpacer_2 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayoutSearch.addItem(self.horizontalSpacer_2)
+
+        self.pushButtonRefresh = QPushButton(self.centralwidget)
+        self.pushButtonRefresh.setObjectName(u"pushButtonRefresh")
+        icon3 = QIcon(QIcon.fromTheme(u"view-refresh"))
+        self.pushButtonRefresh.setIcon(icon3)
+
+        self.horizontalLayoutSearch.addWidget(self.pushButtonRefresh)
+
+
+        self.verticalLayoutGames.addLayout(self.horizontalLayoutSearch)
+
+        self.tableGames = QTableWidget(self.centralwidget)
+        if (self.tableGames.columnCount() < 6):
+            self.tableGames.setColumnCount(6)
+        __qtablewidgetitem = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(0, __qtablewidgetitem)
+        __qtablewidgetitem1 = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(1, __qtablewidgetitem1)
+        __qtablewidgetitem2 = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(2, __qtablewidgetitem2)
+        __qtablewidgetitem3 = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(3, __qtablewidgetitem3)
+        __qtablewidgetitem4 = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(4, __qtablewidgetitem4)
+        __qtablewidgetitem5 = QTableWidgetItem()
+        self.tableGames.setHorizontalHeaderItem(5, __qtablewidgetitem5)
+        self.tableGames.setObjectName(u"tableGames")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.tableGames.sizePolicy().hasHeightForWidth())
+        self.tableGames.setSizePolicy(sizePolicy3)
+        self.tableGames.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.tableGames.setFrameShadow(QFrame.Shadow.Sunken)
+        self.tableGames.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.tableGames.setSizeAdjustPolicy(QAbstractScrollArea.SizeAdjustPolicy.AdjustToContents)
+        self.tableGames.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableGames.setProperty(u"showDropIndicator", False)
+        self.tableGames.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.tableGames.setSortingEnabled(True)
+
+        self.verticalLayoutGames.addWidget(self.tableGames)
+
+
+        self.horizontalLayoutConfigGames.addLayout(self.verticalLayoutGames)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayoutConfigGames)
+
+        self.horizontalLayoutProgressBar = QHBoxLayout()
+        self.horizontalLayoutProgressBar.setObjectName(u"horizontalLayoutProgressBar")
+        self.labelProgressBar = QLabel(self.centralwidget)
+        self.labelProgressBar.setObjectName(u"labelProgressBar")
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.labelProgressBar.sizePolicy().hasHeightForWidth())
+        self.labelProgressBar.setSizePolicy(sizePolicy4)
+
+        self.horizontalLayoutProgressBar.addWidget(self.labelProgressBar)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayoutProgressBar.addItem(self.horizontalSpacer_5)
+
+        self.progressBar = QProgressBar(self.centralwidget)
+        self.progressBar.setObjectName(u"progressBar")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.progressBar.sizePolicy().hasHeightForWidth())
+        self.progressBar.setSizePolicy(sizePolicy5)
+        self.progressBar.setMinimumSize(QSize(500, 0))
+        self.progressBar.setValue(0)
+
+        self.horizontalLayoutProgressBar.addWidget(self.progressBar)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayoutProgressBar)
+
+        self.verticalSpacerConfigButtons = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
+
+        self.verticalLayout.addItem(self.verticalSpacerConfigButtons)
+
+        self.verticalLayoutBottomButtons = QVBoxLayout()
+        self.verticalLayoutBottomButtons.setObjectName(u"verticalLayoutBottomButtons")
+        self.horizontalLayoutBottomButtons = QHBoxLayout()
+        self.horizontalLayoutBottomButtons.setObjectName(u"horizontalLayoutBottomButtons")
+        self.pushButtonExit = QPushButton(self.centralwidget)
+        self.pushButtonExit.setObjectName(u"pushButtonExit")
+        self.pushButtonExit.setMinimumSize(QSize(130, 30))
+
+        self.horizontalLayoutBottomButtons.addWidget(self.pushButtonExit)
+
+        self.horizontalSpacerBottomButtons = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayoutBottomButtons.addItem(self.horizontalSpacerBottomButtons)
+
+        self.pushButtonRun = QPushButton(self.centralwidget)
+        self.pushButtonRun.setObjectName(u"pushButtonRun")
+        self.pushButtonRun.setMinimumSize(QSize(130, 30))
+
+        self.horizontalLayoutBottomButtons.addWidget(self.pushButtonRun)
+
+
+        self.verticalLayoutBottomButtons.addLayout(self.horizontalLayoutBottomButtons)
+
+
+        self.verticalLayout.addLayout(self.verticalLayoutBottomButtons)
+
+        cart_dl.setCentralWidget(self.centralwidget)
+        self.menubar = QMenuBar(cart_dl)
+        self.menubar.setObjectName(u"menubar")
+        self.menubar.setGeometry(QRect(0, 0, 1187, 33))
+        self.menuHelp = QMenu(self.menubar)
+        self.menuHelp.setObjectName(u"menuHelp")
+        cart_dl.setMenuBar(self.menubar)
+        self.statusbar = QStatusBar(cart_dl)
+        self.statusbar.setObjectName(u"statusbar")
+        cart_dl.setStatusBar(self.statusbar)
+
+        self.menubar.addAction(self.menuHelp.menuAction())
+        self.menuHelp.addAction(self.actionDocumentation)
+        self.menuHelp.addAction(self.actionIssues)
+        self.menuHelp.addAction(self.actionAbout)
+
+        self.retranslateUi(cart_dl)
+
+        QMetaObject.connectSlotsByName(cart_dl)
+    # setupUi
+
+    def retranslateUi(self, cart_dl):
+        cart_dl.setWindowTitle(QCoreApplication.translate("cart_dl", u"cart-dl", None))
+        self.actionDocumentation.setText(QCoreApplication.translate("cart_dl", u"Documentation", None))
+#if QT_CONFIG(statustip)
+        self.actionDocumentation.setStatusTip(QCoreApplication.translate("cart_dl", u"View online documentation", None))
+#endif // QT_CONFIG(statustip)
+        self.actionIssues.setText(QCoreApplication.translate("cart_dl", u"Issues", None))
+#if QT_CONFIG(statustip)
+        self.actionIssues.setStatusTip(QCoreApplication.translate("cart_dl", u"Open a GitHub issue", None))
+#endif // QT_CONFIG(statustip)
+        self.actionAbout.setText(QCoreApplication.translate("cart_dl", u"About", None))
+#if QT_CONFIG(statustip)
+        self.actionAbout.setStatusTip(QCoreApplication.translate("cart_dl", u"See About page", None))
+#endif // QT_CONFIG(statustip)
+        self.labelCartDLURL.setText(QCoreApplication.translate("cart_dl", u"CartDL URL:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditCartDLURL.setStatusTip(QCoreApplication.translate("cart_dl", u"Input CartDL URL here. This program will not provide this.", None))
+#endif // QT_CONFIG(statustip)
+        self.lineEditCartDLURL.setInputMask("")
+        self.lineEditCartDLURL.setText("")
+        self.labelDownloadDir.setText(QCoreApplication.translate("cart_dl", u"Download directory:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditDownloadDir.setStatusTip(QCoreApplication.translate("cart_dl", u"Where to download files to", None))
+#endif // QT_CONFIG(statustip)
+        self.lineEditDownloadDir.setPlaceholderText(QCoreApplication.translate("cart_dl", u"/path/to/downloads", None))
+        self.pushButtonDownloadDir.setText(QCoreApplication.translate("cart_dl", u"Browse", None))
+        self.labelJDownloaderDevice.setText(QCoreApplication.translate("cart_dl", u"JDownloader device name:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderDevice.setStatusTip(QCoreApplication.translate("cart_dl", u"Device name for JDownloader", None))
+#endif // QT_CONFIG(statustip)
+        self.labelJDownloaderUser.setText(QCoreApplication.translate("cart_dl", u"JDownloader username:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderUser.setStatusTip(QCoreApplication.translate("cart_dl", u"JDownloader username", None))
+#endif // QT_CONFIG(statustip)
+        self.labelJDownloaderPass.setText(QCoreApplication.translate("cart_dl", u"JDownloader password:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditJDownloaderPass.setStatusTip(QCoreApplication.translate("cart_dl", u"JDownloader password", None))
+#endif // QT_CONFIG(statustip)
+        self.lineEditJDownloaderPass.setText("")
+        self.labelGameDLOptions.setText(QCoreApplication.translate("cart_dl", u"Base download options:", None))
+        self.radioButtonPreferNSP.setText(QCoreApplication.translate("cart_dl", u"Prefer NSPs", None))
+        self.radioButtonPreferXCI.setText(QCoreApplication.translate("cart_dl", u"Prefer XCIs", None))
+        self.labelGameAdditionalFiles.setText(QCoreApplication.translate("cart_dl", u"Additional files:", None))
+#if QT_CONFIG(statustip)
+        self.checkBoxDownloadUpdates.setStatusTip(QCoreApplication.translate("cart_dl", u"If available, will download update files", None))
+#endif // QT_CONFIG(statustip)
+        self.checkBoxDownloadUpdates.setText(QCoreApplication.translate("cart_dl", u"Download Updates", None))
+#if QT_CONFIG(statustip)
+        self.checkBoxDownloadDLC.setStatusTip(QCoreApplication.translate("cart_dl", u"If available, will download DLCs", None))
+#endif // QT_CONFIG(statustip)
+        self.checkBoxDownloadDLC.setText(QCoreApplication.translate("cart_dl", u"Download DLCs", None))
+        self.labelGameAdvancedOptions.setText(QCoreApplication.translate("cart_dl", u"Advanced options:", None))
+#if QT_CONFIG(statustip)
+        self.pushButtonRegionLanguage.setStatusTip(QCoreApplication.translate("cart_dl", u"Open region/language preferences", None))
+#endif // QT_CONFIG(statustip)
+        self.pushButtonRegionLanguage.setText(QCoreApplication.translate("cart_dl", u"Region/Language Preferences", None))
+#if QT_CONFIG(statustip)
+        self.checkBoxDryRun.setStatusTip(QCoreApplication.translate("cart_dl", u"If checked, will not download anything", None))
+#endif // QT_CONFIG(statustip)
+        self.checkBoxDryRun.setText(QCoreApplication.translate("cart_dl", u"Dry Run", None))
+        self.labelDiscordURL.setText(QCoreApplication.translate("cart_dl", u"Discord Webhook URL:", None))
+#if QT_CONFIG(statustip)
+        self.lineEditDiscordURL.setStatusTip(QCoreApplication.translate("cart_dl", u"Webhook URL for Discord", None))
+#endif // QT_CONFIG(statustip)
+        self.lineEditDiscordURL.setText("")
+        self.labelSearch.setText(QCoreApplication.translate("cart_dl", u"Search:", None))
+        self.pushButtonRefresh.setText(QCoreApplication.translate("cart_dl", u"Refresh", None))
+        ___qtablewidgetitem = self.tableGames.horizontalHeaderItem(0)
+        ___qtablewidgetitem.setText(QCoreApplication.translate("cart_dl", u"Name", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem.setToolTip(QCoreApplication.translate("cart_dl", u"Game Name (double-click to open URL)", None));
+#endif // QT_CONFIG(tooltip)
+        ___qtablewidgetitem1 = self.tableGames.horizontalHeaderItem(1)
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("cart_dl", u"DL?", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem1.setToolTip(QCoreApplication.translate("cart_dl", u"Download Game?", None));
+#endif // QT_CONFIG(tooltip)
+        ___qtablewidgetitem2 = self.tableGames.horizontalHeaderItem(2)
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("cart_dl", u"NSP", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem2.setToolTip(QCoreApplication.translate("cart_dl", u"Game has NSP", None));
+#endif // QT_CONFIG(tooltip)
+        ___qtablewidgetitem3 = self.tableGames.horizontalHeaderItem(3)
+        ___qtablewidgetitem3.setText(QCoreApplication.translate("cart_dl", u"XCI", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem3.setToolTip(QCoreApplication.translate("cart_dl", u"Game has XCI", None));
+#endif // QT_CONFIG(tooltip)
+        ___qtablewidgetitem4 = self.tableGames.horizontalHeaderItem(4)
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("cart_dl", u"Updates", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem4.setToolTip(QCoreApplication.translate("cart_dl", u"Game has Updates", None));
+#endif // QT_CONFIG(tooltip)
+        ___qtablewidgetitem5 = self.tableGames.horizontalHeaderItem(5)
+        ___qtablewidgetitem5.setText(QCoreApplication.translate("cart_dl", u"DLC", None));
+#if QT_CONFIG(tooltip)
+        ___qtablewidgetitem5.setToolTip(QCoreApplication.translate("cart_dl", u"Game has DLC", None));
+#endif // QT_CONFIG(tooltip)
+        self.labelProgressBar.setText("")
+        self.progressBar.setFormat(QCoreApplication.translate("cart_dl", u"%p%", None))
+#if QT_CONFIG(statustip)
+        self.pushButtonExit.setStatusTip(QCoreApplication.translate("cart_dl", u"Exit cart-dl", None))
+#endif // QT_CONFIG(statustip)
+        self.pushButtonExit.setText(QCoreApplication.translate("cart_dl", u"Exit", None))
+#if QT_CONFIG(statustip)
+        self.pushButtonRun.setStatusTip(QCoreApplication.translate("cart_dl", u"Run cart-dl", None))
+#endif // QT_CONFIG(statustip)
+        self.pushButtonRun.setText(QCoreApplication.translate("cart_dl", u"Run", None))
+        self.menuHelp.setTitle(QCoreApplication.translate("cart_dl", u"Help", None))
+    # retranslateUi
+
